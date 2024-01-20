@@ -41,7 +41,7 @@ public final class TheSudoPlugin extends JavaPlugin implements Listener {
         plugin = this;
         
         getCommand("sudo").setExecutor(this);
-        getServer().getPluginManager().registerEvent(this, this);
+        getServer().getPluginManager().registerEvents(this, this);
         
         LOGGER.info("TheSudo 插件，允许管理员进行 sudo 操作");
         LOGGER.info("源代码： https://github.com/Imeaces/TheSudo");

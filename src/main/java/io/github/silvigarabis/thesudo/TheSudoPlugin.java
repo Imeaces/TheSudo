@@ -28,10 +28,10 @@ import java.io.File;
 
 public final class TheSudoPlugin extends JavaPlugin implements Listener {
     
-    public static ESplitterPlugin getPlugin(){
+    public static TheSudoPlugin getPlugin(){
         return plugin;
     }
-    private static ESplitterPlugin plugin = null;
+    private static TheSudoPlugin plugin = null;
     
     private Logger LOGGER;
 

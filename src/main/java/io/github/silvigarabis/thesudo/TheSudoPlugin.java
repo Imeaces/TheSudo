@@ -59,17 +59,17 @@ public final class TheSudoPlugin extends JavaPlugin implements Listener {
     //we need raw command text
     private LastCommandData lastCommand;
 
-    @EventHandler(EventPriority.MONITOR)
+    @EventHandler(priority=EventPriority.MONITOR)
     public void onPlayerCommandPreprocessing(PlayerCommandPreprocessEvent event){
        lastCommand = new LastCommandData(event.getPlayer(), event.getMessage(), CommandSenderType.PLAYER);
     }
     
-    @EventHandler(EventPriority.MONITOR)
+    @EventHandler(priority=EventPriority.MONITOR)
     public void onServerCommand(ServerCommandEvent event){
        lastCommand = new LastCommandData(event.getSender(), event.getCommand(), CommandSenderType.CONSOLE);
     }
 
-    @EventHandler(EventPriority.MONITOR)
+    @EventHandler(priority=EventPriority.MONITOR)
     public void onRemoteServerCommand(RemoteServerCommandEvent event){
        lastCommand = new LastCommandData(event.getSender(), event.getCommand(), CommandSenderType.REMOTE_CONSOLE);
     }

@@ -2,7 +2,7 @@ package io.github.silvigarabis.thesudo;
 
 import org.bukkit.command.CommandSender;
 
-public static class LastCommandData {
+public class LastCommandData {
     public CommandSender sender;
     public String command;
     public CommandSenderType senderType;

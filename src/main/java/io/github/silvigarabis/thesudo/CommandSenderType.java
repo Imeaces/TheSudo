@@ -1,5 +1,5 @@
 package io.github.silvigarabis.thesudo;
 
-public static enum CommandSenderType {
+public enum CommandSenderType {
     CONSOLE, REMOTE_CONSOLE, PLAYER
 }

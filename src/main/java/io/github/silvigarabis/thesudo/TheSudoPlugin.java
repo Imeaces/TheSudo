@@ -18,9 +18,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.server.ServerCommandEvent;
 import org.bukkit.event.server.RemoteServerCommandEvent;
-import org.bukkkt.event.Listener;
-import org.bukkkt.event.EventHandler;
-import org.bukkkt.event.EventPriority;
+import org.bukkit.event.Listener;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 
 import java.util.logging.Logger;
 import java.util.List;
@@ -43,9 +43,9 @@ public final class TheSudoPlugin extends JavaPlugin implements Listener {
         getCommand("sudo").setExecutor(this);
         getServer().getPluginManager().registerEvent(this, this);
         
-        logger.info("TheSudo 插件，允许管理员进行 sudo 操作");
-        logger.info("源代码： https://github.com/Imeaces/TheSudo");
-        logger.info("你可以在在GitHub上提出建议，或者反馈错误： https://github.com/Imeaces/TheSudo/issues");
+        LOGGER.info("TheSudo 插件，允许管理员进行 sudo 操作");
+        LOGGER.info("源代码： https://github.com/Imeaces/TheSudo");
+        LOGGER.info("你可以在在GitHub上提出建议，或者反馈错误： https://github.com/Imeaces/TheSudo/issues");
     }
     
     @Override

@@ -18,6 +18,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.server.ServerCommandEvent;
 import org.bukkit.event.server.RemoteServerCommandEvent;
+import org.bukkit.event.server.TabCompleteEvent;
 import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -58,20 +59,26 @@ public final class TheSudoPlugin extends JavaPlugin implements Listener {
 
     //we need raw command text
     private LastCommandData lastCommand;
+    private LastCommandData lastTabCompleteRequestCommand;
 
     @EventHandler(priority=EventPriority.MONITOR)
-    public void onPlayerCommandPreprocessing(PlayerCommandPreprocessEvent event){
+    public void onPlayerCommandPreprocessingEvent(PlayerCommandPreprocessEvent event){
        lastCommand = new LastCommandData(event.getPlayer(), event.getMessage(), CommandSenderType.PLAYER);
     }
     
     @EventHandler(priority=EventPriority.MONITOR)
-    public void onServerCommand(ServerCommandEvent event){
+    public void onServerCommandEvent(ServerCommandEvent event){
        lastCommand = new LastCommandData(event.getSender(), event.getCommand(), CommandSenderType.CONSOLE);
     }
 
     @EventHandler(priority=EventPriority.MONITOR)
-    public void onRemoteServerCommand(RemoteServerCommandEvent event){
+    public void onRemoteServerCommandEvent(RemoteServerCommandEvent event){
        lastCommand = new LastCommandData(event.getSender(), event.getCommand(), CommandSenderType.REMOTE_CONSOLE);
+    }
+
+    @EventHandler(priority=EventPriority.MONITOR)
+    public void onTabCompleteEvent(TabCompleteEvent event){
+        lastTabCompleteRequestCommand = new LastCommandData(event.getSender(), event.getBuffer(), CommandSenderType.UNKNOWN);
     }
 
     @Override
@@ -84,4 +91,12 @@ public final class TheSudoPlugin extends JavaPlugin implements Listener {
         return true;
     }
     
+    public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args){
+        if (lastCommand.sender.equals(sender)){
+            return Sudo.startTabComplete(lastTabCompleteRequestCommand);
+        } else {
+            sender.sendMessage("命令执行者不匹配，无法解析命令");
+        }
+        return null;
+    }
 }
